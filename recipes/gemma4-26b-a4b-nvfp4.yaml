@@ -14,8 +14,7 @@ solo_only: true
 # Container image to use
 container: vllm-node
 
-# build_args:
-#   - --tf5
+# No legacy TF5 build_args needed; vLLM uses Transformers v5 by default.
 
 # Mods
 # mods:

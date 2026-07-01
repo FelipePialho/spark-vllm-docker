@@ -949,17 +949,17 @@ At this point it doesn't seem like NGC container performs any better for this mo
 Added a mod to prevent severe inference speed degradation when using cyankiwi/GLM-4.7-Flash-AWQ-4bit (and potentially other AWQ quants of this model).
 See (this post on NVIDIA forums)[https://forums.developer.nvidia.com/t/make-glm-4-7-flash-go-brrrrr/359111] for implementation details.
 
-To use the mod with the legacy image tag, you can still pass the deprecated `--pre-tf` compatibility flag, e.g.:
+Build the standard image first:
 
 ```bash
-# Deprecated compatibility flag; image tag still defaults to vllm-node-tf5
-./build-and-copy.sh --pre-tf -c
+# Standard image tag defaults to vllm-node
+./build-and-copy.sh -c
 ```
 
 Then, to run on a single node:
 
 ```bash
-./launch-cluster.sh -t vllm-node-tf5 --solo \
+./launch-cluster.sh -t vllm-node --solo \
   --apply-mod mods/fix-glm-4.7-flash-AWQ \
   exec vllm serve cyankiwi/GLM-4.7-Flash-AWQ-4bit \
   --tool-call-parser glm47 \
@@ -976,7 +976,7 @@ Then, to run on a single node:
 To run on cluster:
 
 ```bash
-./launch-cluster.sh -t vllm-node-tf5 \
+./launch-cluster.sh -t vllm-node \
   --apply-mod mods/fix-glm-4.7-flash-AWQ \
   exec vllm serve cyankiwi/GLM-4.7-Flash-AWQ-4bit \
   --tool-call-parser glm47 \
